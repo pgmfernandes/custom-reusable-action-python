@@ -1,0 +1,16 @@
+name: General action
+
+on:
+  workflow_call:
+    secrets:
+      GH_TOKEN:
+        required: true
+        
+jobs:
+  executing-scan:
+    runs-on: ubuntu-latest
+    container: python:3.9-buster
+    steps:
+    - uses:  custom-reusable-action-python/secret-action.yml@main
+      secrets:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
