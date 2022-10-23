@@ -1,11 +1,9 @@
-name: General action
-
+name: security generic scan
 on:
   workflow_call:
     secrets:
       GH_TOKEN:
         required: true
-        
 jobs:
   executing-scan:
     runs-on: ubuntu-latest
@@ -13,4 +11,4 @@ jobs:
     env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
-    - uses:  custom-reusable-action-python/secret-scan-action.yml@main
+    - uses:  pgmfernandes/custom-reusable-action-python/.github/workflows/secret-scan-action.yml@main
