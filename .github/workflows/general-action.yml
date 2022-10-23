@@ -7,6 +7,7 @@ on:
 jobs:
   executing-secret-scan:
     name: Secret Scan
+    if: (github.actor != 'dependabot[bot]')
     uses: pgmfernandes/custom-reusable-action-python/.github/workflows/secret-scan-action.yml@main
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
