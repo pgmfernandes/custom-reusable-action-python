@@ -1,0 +1,34 @@
+name: security generic scan with dynamic configuration
+on:
+  workflow_call:
+    secrets:
+      GH_TOKEN:
+        required: true
+jobs:
+  get-config:
+    name: Get configuration of action
+    runs-on: ubuntu-latest
+    container: python:3.9-buster
+    outputs:
+      SEMGREP_CHECK: ${{ steps.config-pipe-task.outputs.SEMGREP_CHECK }}
+      SEMGREP_SECRET_CONFIG: ${{ steps.config-pipe-task.outputs.SEMGREP_SECRET_CONFIG }}
+      TRIVY_SECRET_CHECK: ${{ steps.config-pipe-task.outputs.TRIVY_SECRET_CHECK }}
+      TRIVY_SECRET_THRESHOLD: ${{ steps.config-pipe-task.outputs.TRIVY_SECRET_THRESHOLD }}
+      TRIVY_SECRET_SECRET_CONFIG: ${{ steps.config-pipe-task.outputs.TRIVY_SECRET_SECRET_CONFIG }}
+      GITLEAKS_CHECK: ${{ steps.config-pipe-task.outputs.GITLEAKS_CHECK }}
+      GITLEAKS_SECRET_CONFIG: ${{ steps.config-pipe-task.outputs.GITLEAKS_SECRET_CONFIG }}
+      SNYK_ORGANIZATION: ${{ steps.config-pipe-task.outputs.SNYK_ORGANIZATION }}
+      SNYK_SCA_CHECK: ${{ steps.config-pipe-task.outputs.SNYK_SCA_CHECK }}
+      SNYK_THRESHOLD_SCA: ${{ steps.config-pipe-task.outputs.SNYK_THRESHOLD_SCA }}
+    steps:        
+      - name: Get configuration of action
+        id: config-pipe-task
+        uses: pgmfernandes/setup-pipeline-action@main
+        with:
+          GH_TOKEN: "${{ secrets.GH_TOKEN }}"
+  get-secret-scan:
+    name: Secret Scan
+    steps: 
+      - id: secret-scan
+        name: Secret Scan
+        uses: secret-scan-action.yml
