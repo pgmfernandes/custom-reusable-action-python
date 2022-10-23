@@ -8,18 +8,16 @@ on:
         required: true
 
 jobs:
-  get-secret-scan-config:
-    name: Getting scan config
+  get-sca-scan-config:
+    name: Getting sca sca config
     runs-on: ubuntu-latest
     container: python:3.9-buster
     outputs:
-      TRIVY_SCA_CHECK: ${{ steps.config-pipe-task.outputs.SEMGREP_CHECK }}
-      TRIVY_SCA_THRESHOLD:: ${{ steps.config-pipe-task.outputs.SEMGREP_CHECK }}
-      SNYK_SCA_CHECK: ${{ steps.config-pipe-task.outputs.TRIVY_SECRET_CHECK }}
-      SNYK_SCA_THRESHOLD: ${{ steps.config-pipe-task.outputs.GITLEAKS_CHECK }}
+      SNYK_SCA_CHECK: ${{ steps.config-pipe-task.outputs.SNYK_SCA_CHECK }}
+      SNYK_THRESHOLD_SCA:: ${{ steps.config-pipe-task.outputs.SNYK_THRESHOLD_SCA }}
+      SNYK_ORG: ${{ steps.config-pipe-task.outputs.SNYK_ORGSNYK_ORG }}      
     steps:        
       - name: Running config pipeline
         id: config-pipe-task
-        uses: pgmfernandes/secret-scan-action-config@main
-        with:
-          GH_TOKEN: "${{ secrets.GH_TOKEN }}"
+        run:
+         echo "Running sca snyk"
