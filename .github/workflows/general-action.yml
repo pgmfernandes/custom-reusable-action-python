@@ -5,10 +5,8 @@ on:
       GH_TOKEN:
         required: true
 jobs:
-  executing-scan:
-    runs-on: ubuntu-latest
-    container: python:3.9-buster
-    env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-    steps:
-    - uses:  pgmfernandes/custom-reusable-action-python/.github/workflows/secret-scan-action.yml@main
+  executing-secret-scan:
+    name: Secret Scan
+    uses: pgmfernandes/custom-reusable-action-python/.github/workflows/secret-scan-action.yml@main
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
