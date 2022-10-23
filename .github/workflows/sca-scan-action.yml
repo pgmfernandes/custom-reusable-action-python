@@ -9,7 +9,7 @@ on:
 
 jobs:
   get-sca-scan-config:
-    name: Getting sca sca config
+    name: Config SCA Scannig
     runs-on: ubuntu-latest
     container: python:3.9-buster
     outputs:
