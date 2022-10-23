@@ -28,7 +28,4 @@ jobs:
           GH_TOKEN: "${{ secrets.GH_TOKEN }}"
   get-secret-scan:
     name: Secret Scan
-    steps: 
-      - id: secret-scan
-        name: Secret Scan
-        uses: secret-scan-action.yml
+    uses: pgmfernandes/custom-reusable-action-python/.github/workflows/secret-scan-action-with-parameters.yaml@main
