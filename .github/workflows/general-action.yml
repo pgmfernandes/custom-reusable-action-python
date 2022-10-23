@@ -11,3 +11,9 @@ jobs:
     uses: pgmfernandes/custom-reusable-action-python/.github/workflows/secret-scan-action.yml@main
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  executing-sca-scan:
+    name: Sca Scan
+    if: (github.actor != 'dependabot[bot]')
+    uses: pgmfernandes/custom-reusable-action-python/.github/workflows/sca-scan-action.yml@main
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
