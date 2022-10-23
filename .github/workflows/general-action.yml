@@ -10,7 +10,7 @@ jobs:
   executing-scan:
     runs-on: ubuntu-latest
     container: python:3.9-buster
-    steps:
-    - uses:  custom-reusable-action-python/secret-action.yml@main
-      secrets:
+    env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    steps:
+    - uses:  custom-reusable-action-python/secret-scan-action.yml@main
